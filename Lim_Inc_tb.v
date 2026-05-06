@@ -45,12 +45,11 @@ module Lim_Inc_tb();
           a = ai;
           ci = cii;
           #5;
-          
-          if (ai >= 7) correct = correct & (sum == 0) & (co == 1);
-          else begin
-           if (ai == 6 )  correct = correct & ( ((sum == 6) & (co == 0) & (cii == 0)) | ((sum == 0) & (co == 1) & (cii == 1)) );
-           else correct = correct & (sum == ai + cii) & (co == 0);
-          end
+          if (ai + cii < 10)
+                     correct = correct & (sum == (ai + cii)) & (co == 0);
+          else
+           correct = correct & (sum == 0) & (co == 1);
+                    loop_was_skipped = 0;
         
          end
         end
