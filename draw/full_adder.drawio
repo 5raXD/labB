@@ -1,0 +1,176 @@
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- INPUT: a -->
+    <mxCell id="cell_a" value="a" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="40" y="90" width="50" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- INPUT: b -->
+    <mxCell id="cell_b" value="b" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="40" y="140" width="50" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- INPUT: ci -->
+    <mxCell id="cell_ci" value="ci" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="40" y="230" width="50" height="30" as="geometry" />
+    </mxCell>
+
+    <!-- XOR GATE 1: aXORb = a ^ b -->
+    <mxCell id="xor1" value="" style="shape=mxgraph.electrical.logic_gates.2-input_xor;fillColor=#00CC00;strokeColor=#005500;pointerEvents=1;" vertex="1" parent="1">
+      <mxGeometry x="180" y="95" width="70" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- LABEL: aXORb -->
+    <mxCell id="lbl_aXORb" value="aXORb" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="258" y="100" width="60" height="24" as="geometry" />
+    </mxCell>
+
+    <!-- XOR GATE 2: sum = aXORb ^ ci -->
+    <mxCell id="xor2" value="" style="shape=mxgraph.electrical.logic_gates.2-input_xor;fillColor=#00CC00;strokeColor=#005500;pointerEvents=1;" vertex="1" parent="1">
+      <mxGeometry x="340" y="130" width="70" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- OUTPUT LABEL: sum -->
+    <mxCell id="lbl_sum" value="sum" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="420" y="143" width="50" height="28" as="geometry" />
+    </mxCell>
+
+    <!-- AND GATE 1: XORcarry = aXORb & ci -->
+    <mxCell id="and1" value="" style="shape=mxgraph.electrical.logic_gates.2-input_and;fillColor=#00CC00;strokeColor=#005500;pointerEvents=1;" vertex="1" parent="1">
+      <mxGeometry x="360" y="220" width="70" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- LABEL: XORcarry -->
+    <mxCell id="lbl_XORcarry" value="XORcarry" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="438" y="228" width="72" height="24" as="geometry" />
+    </mxCell>
+
+    <!-- AND GATE 2: aANDb = a & b -->
+    <mxCell id="and2" value="" style="shape=mxgraph.electrical.logic_gates.2-input_and;fillColor=#00CC00;strokeColor=#005500;pointerEvents=1;" vertex="1" parent="1">
+      <mxGeometry x="360" y="300" width="70" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- LABEL: aANDb -->
+    <mxCell id="lbl_aANDb" value="aANDb" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+      <mxGeometry x="360" y="355" width="70" height="24" as="geometry" />
+    </mxCell>
+
+    <!-- OR GATE: co = aANDb | XORcarry -->
+    <mxCell id="or1" value="" style="shape=mxgraph.electrical.logic_gates.2-input_or;fillColor=#00CC00;strokeColor=#005500;pointerEvents=1;" vertex="1" parent="1">
+      <mxGeometry x="530" y="255" width="70" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- OUTPUT LABEL: co -->
+    <mxCell id="lbl_co" value="co" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=12;" vertex="1" parent="1">
+      <mxGeometry x="610" y="268" width="50" height="28" as="geometry" />
+    </mxCell>
+
+    <!-- WIRE: a → XOR1 (top input) -->
+    <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="cell_a" target="xor1" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- WIRE: b → XOR1 (bottom input) -->
+    <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="cell_b" target="xor1" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- WIRE: aXORb (XOR1 output) → XOR2 (top input) -->
+    <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="xor1" target="xor2" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="320" y="120" />
+          <mxPoint x="320" y="155" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- WIRE: ci → XOR2 (bottom input) -->
+    <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="cell_ci" target="xor2" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="160" y="245" />
+          <mxPoint x="160" y="175" />
+          <mxPoint x="340" y="175" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- WIRE: XOR2 output → sum label -->
+    <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="xor2" target="lbl_sum" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- WIRE: aXORb (from XOR1) → AND1 (top input) -->
+    <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="xor1" target="and1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="320" y="120" />
+          <mxPoint x="320" y="245" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- WIRE: ci → AND1 (bottom input) -->
+    <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="cell_ci" target="and1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="150" y="245" />
+          <mxPoint x="150" y="270" />
+          <mxPoint x="360" y="270" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- WIRE: a → AND2 (top input) -->
+    <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="cell_a" target="and2" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="130" y="105" />
+          <mxPoint x="130" y="315" />
+          <mxPoint x="360" y="315" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- WIRE: b → AND2 (bottom input) -->
+    <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="cell_b" target="and2" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="140" y="155" />
+          <mxPoint x="140" y="335" />
+          <mxPoint x="360" y="335" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- WIRE: AND1 output → OR1 (top input) -->
+    <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="and1" target="or1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="510" y="245" />
+          <mxPoint x="510" y="270" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- WIRE: AND2 output → OR1 (bottom input) -->
+    <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="and2" target="or1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="510" y="325" />
+          <mxPoint x="510" y="295" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- WIRE: OR1 output → co label -->
+    <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="or1" target="lbl_co" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>
