@@ -29,5 +29,14 @@ module Lim_Inc(a, ci, sum, co);
     output co;
 
     // FILL HERE
+        CSA #(.N(N)) csa (
+    .a(a),
+    .b({N{1'b0}}),
+    .ci(ci),
+    .sum(inc_a),
+    .co(csa_co)
+    );
     
+    assign sum = ({csa_co,inc_a} < L)? inc_a: {N{1'b0}};
+    assign co  = ({csa_co,inc_a} < L)? 1'b0: 1'b1;
 endmodule
