@@ -21,15 +21,18 @@
 module Lim_Inc(a, ci, sum, co);
     
     parameter L = 10;
-    localparam N = /* FILL HERE */;
+    localparam N = $clog2(L);
     
     input [N-1:0] a;
     input ci;
     output [N-1:0] sum;
     output co;
+    
+    wire [N-1:0] inc_a;
+    wire csa_co;
 
     // FILL HERE
-        CSA #(.N(N)) csa (
+    CSA #(.N(N)) csa (
     .a(a),
     .b({N{1'b0}}),
     .ci(ci),
@@ -39,4 +42,5 @@ module Lim_Inc(a, ci, sum, co);
     
     assign sum = ({csa_co,inc_a} < L)? inc_a: {N{1'b0}};
     assign co  = ({csa_co,inc_a} < L)? 1'b0: 1'b1;
+    
 endmodule
