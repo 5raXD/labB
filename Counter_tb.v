@@ -28,6 +28,7 @@ module Counter_tb();
     
     // Instantiate the UUT (Unit Under Test)
     // TODO
+    Counter uut (.clk(clk), .init_regs(init_regs), .count_enabled(count_enabled), .time_reading(time_reading));
     
     assign tens_seconds_wire = time_reading[7:4];
     assign ones_seconds_wire = time_reading[3:0];
@@ -35,8 +36,6 @@ module Counter_tb();
     initial begin 
         #1
         sync = 0;
-        count_sample = 0;
-        show_sample = 0;
         correct = 1;
         loop_was_skipped = 1;
         clk = 1;
@@ -47,12 +46,13 @@ module Counter_tb();
         count_enabled = 1;        
         // Remember that every 1000000 clocks are 10 milliseconds
         for( ts=0; ts<1; ts=ts+1 ) begin // not more than 1*10 seconds check
-            for( os=0; os<2; os=os+1 ) begin // not more than 2*1 seconds check
-                            #(99999999+sync) // FILL HERE THE "correct" signal MAINTENANCE 
+            for( os=0; os<10; os=os+1 ) begin // not more than 2*1 seconds check
+                            #(999999999+sync) // FILL HERE THE "correct" signal MAINTENANCE 
                             sync = sync | 1;
                             loop_was_skipped = 0;
-
-           end
+                            correct = (ts == tens_seconds_wire) && (os == ones_seconds_wire);
+                            
+           end          
         end
         
         #5

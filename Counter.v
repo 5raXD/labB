@@ -30,12 +30,45 @@ module Counter(clk, init_regs, count_enabled, time_reading);
    reg [3:0] ones_seconds;    
    reg [3:0] tens_seconds;      
    
-   // FILL HERE THE LIMITED-COUNTER INSTANCES
+   wire co_sec;
+   wire [3:0] sum_sec;
+   wire co_tsec;
+   wire [3:0] sum_tsec;
+   wire tick_1hz;
+   wire [$clog2(CLK_FREQ)-1:0] clk_cnt_sum;
    
-   //------------- Synchronous ----------------
+  
+   // FILL HERE THE LIMITED-COUNTER INSTANCES
+   Lim_Inc #(.L(10)) Lim_Inc_sec(.a(ones_seconds), 
+   .ci(tick_1hz & count_enabled), 
+   .sum(sum_sec), .co(co_sec)
+   );
+   Lim_Inc #(.L(10)) Lim_Inc_tsec(.a(tens_seconds), 
+   .ci(co_sec & count_enabled), 
+   .sum(sum_tsec), 
+   .co(co_tsec)
+   );
+   Lim_Inc #(.L(CLK_FREQ)) Lim_Inc(.a(clk_cnt), 
+   .ci(1'b1), 
+   .sum(clk_cnt_sum), 
+   .co(tick_1hz)
+   );
+
    always @(posedge clk)
      begin
-		// FILL HERE THE ADVANCING OF THE REGISTERS AS A FUNCTION OF init_regs, count_enabled
+		if (init_regs) begin
+		  ones_seconds <= 4'b0;
+		  tens_seconds <= 4'b0;
+		  clk_cnt      <= 0;
+		end else if (count_enabled) begin
+		  clk_cnt <= clk_cnt_sum;
+		  if (tick_1hz) begin
+		      ones_seconds <= sum_sec;
+		      tens_seconds <= sum_tsec;
+		  end
+		end
      end
+     
+     assign time_reading = {tens_seconds, ones_seconds};
 
 endmodule
