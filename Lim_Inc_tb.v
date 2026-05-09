@@ -25,32 +25,37 @@ module Lim_Inc_tb();
     wire co;
     
     integer ai,cii;
+
+    localparam L = 10;
     
     // Instantiate the UUT (Unit Under Test)
-    Lim_Inc #(10) uut(
+    Lim_Inc #(L) uut(
     .a(a),
     .ci(ci),
     .sum(sum),
     .co(co)
     );
-	//FILL HERE
     
+	//FILL HERE
     initial begin
+
         correct = 1;
         loop_was_skipped = 1;
         #1
         //FILL HERE
+        // a has 4 bits so will test all vlaues from 0 to 15 with both ci = 0 and ci =1
         for (ai = 0; ai<16; ai=ai+1) begin
          for (cii = 0; cii<=1; cii=cii+1) begin 
           a = ai;
           ci = cii;
           #5;
-          if (ai + cii < 10)
-                     correct = correct & (sum == (ai + cii)) & (co == 0);
-          else
-           correct = correct & (sum == 0) & (co == 1);
-                    loop_was_skipped = 0;
-        
+          
+          if (ai >= L) correct = correct & (sum == 0) & (co == 1);
+          else begin
+           if (ai == L-1)  correct = correct & ( ((sum == ai) & (co == 0) & (cii == 0)) | ((sum == 0) & (co == 1) & (cii == 1)) );
+           else correct = correct & (sum == ai + cii) & (co == 0);
+          end
+            loop_was_skipped = 0;
          end
         end
         #5
