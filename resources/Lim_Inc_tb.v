@@ -25,9 +25,11 @@ module Lim_Inc_tb();
     wire co;
     
     integer ai,cii;
+
+    localparam L = 7;
     
     // Instantiate the UUT (Unit Under Test)
-    Lim_Inc #(7) uut(
+    Lim_Inc #(L) uut(
     .a(a),
     .ci(ci),
     .sum(sum),
@@ -35,8 +37,8 @@ module Lim_Inc_tb();
     );
     
 	//FILL HERE
-    assign sum[3]   = 1'b0; 
     initial begin
+
         correct = 1;
         loop_was_skipped = 1;
         #1
@@ -48,12 +50,12 @@ module Lim_Inc_tb();
           ci = cii;
           #5;
           
-          if (ai >= 7) correct = correct & (sum == 0) & (co == 1);
+          if (ai >= L) correct = correct & (sum == 0) & (co == 1);
           else begin
-           if (ai == 6 )  correct = correct & ( ((sum == 6) & (co == 0) & (cii == 0)) | ((sum == 0) & (co == 1) & (cii == 1)) );
+           if (ai == L-1)  correct = correct & ( ((sum == ai) & (co == 0) & (cii == 0)) | ((sum == 0) & (co == 1) & (cii == 1)) );
            else correct = correct & (sum == ai + cii) & (co == 0);
           end
-        
+            loop_was_skipped = 0;
          end
         end
         #5
