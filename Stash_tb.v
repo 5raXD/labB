@@ -42,18 +42,43 @@ module Stash_tb();
         sample_in_valid = 0;
         next_sample = 0;
         //FILL HERE
-        #6
+        #6;
         reset = 0;
+
         for( ini=0; ini<7; ini=ini+1 ) begin
             //FILL HERE
-            sample_in = ini * 10; // values: 0,10,20,30,40,50,60
+            // Set up sample_in before the rising edge
+            sample_in = (ini + 1) * 10; // values: 10, 20, 30, 40, 50, 60, 70
             sample_in_valid = 1;
-            #10;
+            #1;
+            correct = correct & (sample_out == (ini + 1) * 10);
+            #9;
             sample_in_valid = 0;
-            #10
-            correct =  correct & (sample_out ==  ini * 10); //FILL HERE
+            #10;
             loop_was_skipped = 0;
         end
+        correct = correct & (sample_out == 70);
+
+        // rd_ptr=1 -> 2(30) -> 3(40) -> 4(50) -> 0(60) -> 1(70)
+        next_sample = 1; #10;
+        next_sample = 0; #10;
+        correct = correct & (sample_out == 30); // rd_ptr=2
+
+        next_sample = 1; #10;
+        next_sample = 0; #10;
+        correct = correct & (sample_out == 40); // rd_ptr=3
+
+        next_sample = 1; #10;
+        next_sample = 0; #10;
+        correct = correct & (sample_out == 50); // rd_ptr=4
+
+        next_sample = 1; #10;
+        next_sample = 0; #10;
+        correct = correct & (sample_out == 60); // rd_ptr=0, wrapped around
+
+        next_sample = 1; #10;
+        next_sample = 0; #10;
+        correct = correct & (sample_out == 70); // rd_ptr=1, back to start
         #5
         if (correct && ~loop_was_skipped)
             $display("Test Passed - %m");

@@ -64,6 +64,6 @@ module Stash(clk, reset, sample_in, sample_in_valid, next_sample, sample_out);
        end
    end
 
-   assign sample_out = stack[rd_ptr];
+   assign sample_out = sample_in_valid ? sample_in : stack[rd_ptr];
 
 endmodule
