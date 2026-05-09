@@ -25,17 +25,31 @@ module Stash_tb();
     
     // Instantiate the UUT (Unit Under Test)
     //FILL HERE
-    
+    Stash #(.DEPTH(5)) uut (
+    .clk(clk),
+    .reset(reset),
+    .sample_in(sample_in),
+    .sample_in_valid(sample_in_valid),
+    .next_sample(next_sample),
+    .sample_out(sample_out)
+    );
     initial begin
         correct = 1;
         clk = 0; 
         reset = 1; 
         loop_was_skipped = 1;
+        sample_in = 8'h00;
+        sample_in_valid = 0;
+        next_sample = 0;
         //FILL HERE
         #6
         reset = 0;
         for( ini=0; ini<7; ini=ini+1 ) begin
             //FILL HERE
+            sample_in = ini * 10; // values: 0,10,20,30,40,50,60
+            sample_in_valid = 1;
+            #10;
+            sample_in_valid = 0;
             #10
             correct =  //FILL HERE
             loop_was_skipped = 0;
