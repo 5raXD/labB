@@ -24,6 +24,14 @@ module Ctl_tb();
     
     // Instantiate the UUT (Unit Under Test)
     // FILL HERE
+    Ctl uut(
+    .clk(clk), 
+    .reset(reset), 
+    .trig(trig), 
+    .split(split), 
+    .init_regs(init_regs), 
+    .count_enabled(count_enabled)
+    ); 
     
     initial begin
         correct = 1;
@@ -37,6 +45,26 @@ module Ctl_tb();
         #20
         // FILL HERE - TEST VARIOUS STATE TRANSITION 
 		// AND COMPARE AGAINST EXPECTED OUTPUT SIGNALS
+        reset =0 ; trig = 1; split =0;
+        #10 correct = correct & (init_regs == 0 ) & (count_enabled == 1);
+        reset =0 ; trig = 0; split =0;
+        #10 correct = correct & (init_regs == 0 ) & (count_enabled ==1);
+        reset =0 ; trig = 1; split =0;
+        #10 correct = correct & (init_regs == 0 ) & (count_enabled ==0);
+        reset =0 ; trig = 0; split =0;
+        #10 correct = correct & (init_regs == 0 ) & (count_enabled ==0);
+        reset =0 ; trig = 1; split =0;
+        #10 correct = correct & (init_regs == 0 ) & (count_enabled ==1);
+        reset =1 ; trig = 1; split =1;
+        #10 correct = correct & (init_regs == 1 ) & (count_enabled ==0);
+        reset =1 ; trig = 0; split =0;
+        #10 correct = correct & (init_regs == 1 ) & (count_enabled ==0);
+        reset =0 ; trig = 1; split =0;
+        #10 correct = correct & (init_regs == 0 ) & (count_enabled ==1);
+        reset =0 ; trig = 1; split =0;
+        #10 correct = correct & (init_regs == 0 ) & (count_enabled ==0);
+        reset =0 ; trig = 0; split =1;
+        #10 correct = correct & (init_regs == 1 ) & (count_enabled ==0);
         #10        
         
           
