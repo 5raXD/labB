@@ -51,7 +51,7 @@ module Stash_tb();
             #10;
             sample_in_valid = 0;
             #10
-            correct =  //FILL HERE
+            correct =  correct & (sample_out ==  ini * 10); //FILL HERE
             loop_was_skipped = 0;
         end
         #5
