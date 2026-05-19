@@ -21,8 +21,11 @@ module Stash_tb();
     reg clk, reset, sample_in_valid, next_sample, correct, loop_was_skipped;
     reg [7:0] sample_in;
     wire [7:0] sample_out;
-    integer ini;
-    
+    integer ini, k;
+
+    // Mirror of the UUT's internal stack, kept for waveform visibility
+    reg [7:0] stored_samples [4:0];
+
     // Instantiate the UUT (Unit Under Test)
     //FILL HERE
     Stash #(.DEPTH(5)) uut (
@@ -41,23 +44,29 @@ module Stash_tb();
         sample_in = 8'h00;
         sample_in_valid = 0;
         next_sample = 0;
+        for (k = 0; k < 5; k = k + 1) stored_samples[k] = 8'h00;
         //FILL HERE
         #6;
         reset = 0;
+        #10;                                // idle cycle so the reset state is visible
 
         for( ini=0; ini<7; ini=ini+1 ) begin
             //FILL HERE
             // Set up sample_in before the rising edge
             sample_in = (ini + 1) * 10; // values: 10, 20, 30, 40, 50, 60, 70
+            stored_samples[ini % 5] = (ini + 1) * 10; // mirror the UUT write
             sample_in_valid = 1;
             #1;
             correct = correct & (sample_out == (ini + 1) * 10);
             #9;
             sample_in_valid = 0;
+            sample_in = 8'h00; 
             #10;
             loop_was_skipped = 0;
         end
         correct = correct & (sample_out == 70);
+
+        #20;                                // idle gap between write phase and read phase
 
         // rd_ptr=1 -> 2(30) -> 3(40) -> 4(50) -> 0(60) -> 1(70)
         next_sample = 1; #10;
