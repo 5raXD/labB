@@ -29,29 +29,28 @@ module Ctl(clk, reset, trig, split, init_regs, count_enabled);
    reg [SIZE-1:0] 	  state;
 
    //-------------Transition Function (Delta) ----------------
-   always @(posedge clk)begin
-        if (reset)
-          state <= IDLE;
-        else begin
-          // FILL HERE STATE TRANSITIONS
-          case (state)
-            IDLE      : (trig)? state <= COUNTING : state <= IDLE;
-            COUNTING  : (trig)? state <= PAUSED   : state <= COUNTING;
-            PAUSED    : begin
-                casez({reset, trig, split})
-                  3'b000: state <= PAUSED;
-                  3'b1??: state <= IDLE;
-                  3'b01?: state <= COUNTING;
-                  default : state <= PAUSED;
-                endcase
-              end
+always @(posedge clk) begin
+    if (reset)
+        state <= IDLE;
+    else begin
+        case (state)
+            IDLE:     state <= trig ? COUNTING : IDLE;
+            COUNTING: state <= trig ? PAUSED   : COUNTING;
+            PAUSED: begin
+                if (trig)
+                    state <= COUNTING;
+                else if (split)
+                    state <= IDLE;
+                else
+                    state <= PAUSED;
             end
-            default   : state <= IDLE;
-          endcase
-     end
+            default:  state <= IDLE;
+        endcase
+    end
+end
      
    //-------------Output Function (Lambda) ----------------
-	 assign init_regs     = (state == IDLE); // FILL HERE
-	 assign count_enabled = (state == COUNTING); // FILL HERE
+	 assign init_regs     = (state == IDLE)? 1'b1: 1'b0;// FILL HERE
+	 assign count_enabled = (state == COUNTING)? 1'b1: 1'b0;  // FILL HERE
 
 endmodule
