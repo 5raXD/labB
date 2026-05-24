@@ -1,0 +1,25 @@
+\contentsline {section}{\numberline {1}Full Adder (FA)}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Truth Table}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Gate-Level Schematic}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Waveform Simulations}{3}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Conditional Sum Adder (CSA(N))}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Block Diagram}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Time Comparison with Ripple Carry Adder}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Generate Block}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Simulation Waveform - CSA(3)}{5}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Simulation Waveform - CSA(4)}{7}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Limited Incrementor(Lim\_Inc)}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Block Diagram}{8}{subsection.3.1}%
+\contentsline {section}{\numberline {4}Debouncer}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Block Diagram}{10}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Counter Value Tradeoff}{11}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Seven Segment Display (Seg\_7\_Display)}{12}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Clock Division Selection}{12}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Stopwatch}{13}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Block Diagram}{13}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Elaborated Design Schematic}{14}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Synthesized Design Comparison}{15}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Timing and summary}{16}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Timing Summary}{16}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Critical Setup Path}{17}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Project Summary}{18}{subsection.7.3}%
