@@ -1,0 +1,146 @@
+================================================================================
+                    STOPWATCH TOP-MODULE BLOCK DIAGRAM
+                       (Stopwatch.v - EE3 Lab1, FPGA)
+================================================================================
+
+Legend:
+    [ MODULE ]   = instantiated Verilog module
+    ( logic )    = combinational glue / mux / gate
+    { REG }      = always-block register inside Stopwatch.v
+    ===>         = multi-bit bus           --->  = single-bit signal
+    (clk reaches every clocked block; lines omitted for clarity)
+
+
+                                INPUT BUTTONS
+   btnC      btnU       btnR        btnL        btnD
+    |         |          |           |           |
+    v         v          v           v           v
++--------+ +--------+ +--------+ +--------+ +--------+
+|Debounce| |Debounce| |Debounce| |Debounce| |Debounce|   (5x, COUNTER_BITS=20)
+| reset  | | trig   | | split  | | toggle | | sample |
++---+----+ +---+----+ +---+----+ +---+----+ +---+----+
+    |          |          |          |          |
+    | reset    | trig     | split    | toggle   | sample
+    |          |          |          |          |
+    |          |          |          v          |
+    |          |          |   +-------------+   |
+    |          |          |   |  { selected }|<-+ reset
+    |          |          |   |   T flip    |   (cleared on reset,
+    |          |          |   |   on toggle |    flipped on toggle)
+    |          |          |   +------+------+
+    |          |          |          |
+    |          |          |          +--------- selected --------+----------+
+    |          |          |          |                           |          |
+    |          |          |          | (~selected)               |          |
+    |          |          |          v                           |          |
+    |          |  +-----------+ +-----------+                    |          |
+    |          +->|  AND gate |->| trig_ctl  |---+                |          |
+    |             | trig&~sel |  +-----------+   |                |          |
+    |             +-----------+                  |                |          |
+    |                                            |                |          |
+    |          +-----------+ +-----------+       |                |          |
+    |          |  AND gate |->| split_ctl |---+  |                |          |
+    |          |split&~sel |  +-----------+   |  |                |          |
+    |          +-----------+                  |  |                |          |
+    |             ^                           |  |                |          |
+    |             |  split                    |  |                |          |
+    |             |                           |  |                |          |
+    |             | (selected ? trig : 0) ----|--|----------------+          |
+    |             |                           |  |       (next_sample)       |
+    |  reset      | trig_ctl    split_ctl     v  v                           |
+    |     |       |    |          |           |  |                           |
+    v     v       v    v          v           |  |                           |
+   +-----------------------------+            |  |                           |
+   |         [ Ctl ]  FSM        |            |  |                           |
+   |   in: reset, trig, split    |            |  |                           |
+   |   out: init_regs,           |            |  |                           |
+   |        count_enabled        |            |  |                           |
+   +------+----------+-----------+            |  |                           |
+          | init_regs|count_enabled           |  |                           |
+          |          |                        |  |                           |
+          |          +--------+---------------|--|---------------+           |
+          |                   |               |  |               |           |
+          v                   v               |  |               |           |
+   +-------------------------------+          |  |               |           |
+   |    [ Counter ]                |          |  |               |           |
+   |    CLK_FREQ = 100 MHz         |          |  |               |           |
+   |    in : init_regs,            |          |  |               |           |
+   |         count_enabled         |          |  |               |           |
+   |    out: time_reading [7:0]    |          |  |               |           |
+   +---------------+---------------+          |  |               |           |
+                   |                          |  |               |           |
+                   | time_reading [7:0]       |  |               |           |
+                   +======+===================+  |               |           |
+                          |                   |  |               |           |
+                          |                   v  v               |           |
+                          |             +----------------+       |           |
+                          |             |  [ Stash ]     |       |           |
+                          | sample_in   |  DEPTH = 5     |       |           |
+                          +============>| FIFO of        |       |           |
+                          |             | snapshots      |       |           |
+                          | sample_in_valid <-- sample   |       |           |
+                          |             | next_sample <--+       |           |
+                          |             | clk, reset             |           |
+                          |             | out: stash_out [7:0]   |           |
+                          |             +-------+--------+       |           |
+                          |                     | stash_out      |           |
+                          |                     |                |           |
+                          |                                                  |
+                          | (Split snapshot block, in Stopwatch.v)           |
+                          |  triggered by split_ctl while count_enabled      |
+                          v                                                  |
+                +-------------------------+                                  |
+                |  { snapshot [7:0] }     |                                  |
+                |  { split_active }       |                                  |
+                |  reset/init_regs clear  |                                  |
+                +-----+-------------+-----+                                  |
+                      |             |                                        |
+                      | snapshot    | split_active                           |
+                      v             |                                        |
+                  +--------+        |                                        |
+   time_reading ->|  MUX   |<-------+                                        |
+   snapshot    -->|  2:1   |                                                 |
+                  +---+----+                                                 |
+                      | time_out [7:0]                                       |
+                      |                                                      |
+                      v                                                      |
+                +------------------------------+                             |
+                |    [ Seg_7_Display ]         |                             |
+                |    x = {time_out, stash_out} |<====== stash_out ===========+
+                |    clk, clr = reset          |
+                |    out: a_to_g[6:0] (seg),   |
+                |         an[3:0], dp          |
+                +---+-----------+----------+---+
+                    |           |          |
+                    v           v          v
+                  seg[6:0]    an[3:0]     dp
+                  -> 4-digit 7-segment display
+
+
+                LED indicators of the currently selected stopwatch
+                -------------------------------------------------
+                led_left  = {3{ ~selected }}      (LHS active)
+                led_right = {3{  selected }}      (RHS active)
+
+
+================================================================================
+SIGNAL / DATA-FLOW SUMMARY
+================================================================================
+- 5 debouncers clean the buttons into single-cycle level signals.
+- 'selected' chooses which stopwatch is being controlled:
+        selected = 0  -> LEFT  stopwatch (Ctl + Counter run)
+        selected = 1  -> RIGHT stopwatch (Stash advances on trig)
+- Ctl is an FSM driven only when the LEFT stopwatch is selected
+  (trig_ctl/split_ctl are masked when selected = 1).
+- Counter produces the running BCD time on 'time_reading'.
+- The local snapshot register implements the "split" view: while
+  split_active is high, the display shows the frozen 'snapshot' instead
+  of the live 'time_reading'. It is cleared on reset/init_regs or when
+  counting stops.
+- Stash is a DEPTH=5 FIFO of stored samples: 'btnD' (sample) pushes the
+  current 'time_reading' in; while the RIGHT stopwatch is selected,
+  'btnU' (trig) advances to the next stored sample.
+- Seg_7_Display gets a 16-bit word {time_out, stash_out}, i.e. the
+  live/split time on the left two digits and the stash readout on the
+  right two digits, and drives the 4-digit 7-segment display.
+================================================================================

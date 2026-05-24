@@ -1,5 +1,5 @@
 `timescale 1ns/10ps
-`define WIDTH 4
+`define WIDTH 3
 //////////////////////////////////////////////////////////////////////////////////
 // Company:         Tel Aviv University
 // Engineer:        
@@ -25,6 +25,9 @@ module CSA_tb();
     reg ci, correct, loop_was_skipped;
     wire [`WIDTH-1:0] sum;
     wire co;
+    
+    wire [`WIDTH:0] co_sum;
+    assign co_sum = {co , sum};
     
     integer ai,bi,cii;
     

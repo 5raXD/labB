@@ -21,7 +21,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module CSA(a, b, ci, sum, co);
 
-    parameter N=4;
+    parameter N=3;
     parameter K = N >> 1;
     
     input [N-1:0] a;

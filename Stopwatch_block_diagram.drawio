@@ -1,0 +1,218 @@
+<mxfile host="app.diagrams.net" modified="2026-05-24T00:00:00.000Z" agent="ClaudeCode" version="22.0.0">
+  <diagram id="stopwatch" name="Stopwatch Block Diagram">
+    <mxGraphModel dx="2400" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- =============== TITLE & NOTE =============== -->
+        <mxCell id="title" value="Stopwatch.v - Top Module Block Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=24;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="650" y="10" width="900" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="Schematic convention: wires with the same name are connected (signals routed by name, not by drawn lines).&#10;Thin = 1-bit. Thick = multi-bit bus (bit width in brackets).  clk is shown as a bottom pin on every clocked block." style="text;html=1;align=center;fontSize=12;fontStyle=2;fillColor=#f5f5f5;strokeColor=#cccccc;whiteSpace=wrap" vertex="1" parent="1">
+          <mxGeometry x="500" y="50" width="1200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ================================================================= -->
+        <!-- ROW 1 :  D E B O U N C E R S                                      -->
+        <!-- ================================================================= -->
+
+        <!-- deb_reset (btnC -> reset) -->
+        <mxCell id="deb_reset" value="Debouncer&#10;deb_reset&#10;COUNTER_BITS = 20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="140" y="120" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="deb_reset_in" value="btnC" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="60" y="160" as="sourcePoint" /><mxPoint x="140" y="160" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="deb_reset_out" value="reset" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="300" y="160" as="sourcePoint" /><mxPoint x="400" y="160" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="deb_reset_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="220" y="250" as="sourcePoint" /><mxPoint x="220" y="200" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- deb_trig (btnU -> trig) -->
+        <mxCell id="deb_trig" value="Debouncer&#10;deb_trig&#10;COUNTER_BITS = 20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="520" y="120" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="deb_trig_in" value="btnU" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="440" y="160" as="sourcePoint" /><mxPoint x="520" y="160" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="deb_trig_out" value="trig" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="680" y="160" as="sourcePoint" /><mxPoint x="780" y="160" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="deb_trig_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="600" y="250" as="sourcePoint" /><mxPoint x="600" y="200" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- deb_split (btnR -> split) -->
+        <mxCell id="deb_split" value="Debouncer&#10;deb_split&#10;COUNTER_BITS = 20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="900" y="120" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="deb_split_in" value="btnR" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="820" y="160" as="sourcePoint" /><mxPoint x="900" y="160" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="deb_split_out" value="split" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1060" y="160" as="sourcePoint" /><mxPoint x="1160" y="160" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="deb_split_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="980" y="250" as="sourcePoint" /><mxPoint x="980" y="200" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- deb_toggle (btnL -> toggle) -->
+        <mxCell id="deb_toggle" value="Debouncer&#10;deb_toggle&#10;COUNTER_BITS = 20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1280" y="120" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="deb_toggle_in" value="btnL" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1200" y="160" as="sourcePoint" /><mxPoint x="1280" y="160" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="deb_toggle_out" value="toggle" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1440" y="160" as="sourcePoint" /><mxPoint x="1540" y="160" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="deb_toggle_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1360" y="250" as="sourcePoint" /><mxPoint x="1360" y="200" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- deb_sample (btnD -> sample) -->
+        <mxCell id="deb_sample" value="Debouncer&#10;deb_sample&#10;COUNTER_BITS = 20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="1660" y="120" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="deb_sample_in" value="btnD" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1580" y="160" as="sourcePoint" /><mxPoint x="1660" y="160" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="deb_sample_out" value="sample" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1820" y="160" as="sourcePoint" /><mxPoint x="1920" y="160" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="deb_sample_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1740" y="250" as="sourcePoint" /><mxPoint x="1740" y="200" as="targetPoint" /></mxGeometry></mxCell>
+
+
+        <!-- ================================================================= -->
+        <!-- ROW 2 :  S E L E C T E D   R E G  +  3  A N D s  +  L E D s     -->
+        <!-- ================================================================= -->
+
+        <!-- selected register -->
+        <mxCell id="sel_reg" value="selected (reg)&#10;T-flip-flop on toggle&#10;cleared on reset" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="140" y="320" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="sel_in_tog" value="toggle" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="40" y="360" as="sourcePoint" /><mxPoint x="140" y="360" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="sel_in_rst" value="reset" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="40" y="410" as="sourcePoint" /><mxPoint x="140" y="410" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="sel_out" value="selected" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="340" y="380" as="sourcePoint" /><mxPoint x="450" y="380" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="sel_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="240" y="490" as="sourcePoint" /><mxPoint x="240" y="440" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- AND gate : trig_ctl = trig & ~selected -->
+        <mxCell id="and_t" value="" style="shape=mxgraph.electrical.logic_gates.gate_and_2;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="600" y="335" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="and_t_label" value="trig_ctl =&#10;trig &amp; ~selected" style="text;html=1;align=center;fontSize=10;fontStyle=2;fillColor=none;strokeColor=none" vertex="1" parent="1">
+          <mxGeometry x="580" y="410" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="and_t_in1" value="trig" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="500" y="352" as="sourcePoint" /><mxPoint x="600" y="352" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="and_t_in2" value="~selected" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="500" y="388" as="sourcePoint" /><mxPoint x="600" y="388" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="and_t_out" value="trig_ctl" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="700" y="370" as="sourcePoint" /><mxPoint x="800" y="370" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- AND gate : split_ctl = split & ~selected -->
+        <mxCell id="and_s" value="" style="shape=mxgraph.electrical.logic_gates.gate_and_2;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="950" y="335" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="and_s_label" value="split_ctl =&#10;split &amp; ~selected" style="text;html=1;align=center;fontSize=10;fontStyle=2;fillColor=none;strokeColor=none" vertex="1" parent="1">
+          <mxGeometry x="930" y="410" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="and_s_in1" value="split" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="850" y="352" as="sourcePoint" /><mxPoint x="950" y="352" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="and_s_in2" value="~selected" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="850" y="388" as="sourcePoint" /><mxPoint x="950" y="388" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="and_s_out" value="split_ctl" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1050" y="370" as="sourcePoint" /><mxPoint x="1150" y="370" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- AND gate : next_sample = trig & selected -->
+        <mxCell id="and_n" value="" style="shape=mxgraph.electrical.logic_gates.gate_and_2;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="1300" y="335" width="100" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="and_n_label" value="next_sample =&#10;trig &amp; selected" style="text;html=1;align=center;fontSize=10;fontStyle=2;fillColor=none;strokeColor=none" vertex="1" parent="1">
+          <mxGeometry x="1280" y="410" width="140" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="and_n_in1" value="trig" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1200" y="352" as="sourcePoint" /><mxPoint x="1300" y="352" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="and_n_in2" value="selected" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1200" y="388" as="sourcePoint" /><mxPoint x="1300" y="388" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="and_n_out" value="next_sample" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1400" y="370" as="sourcePoint" /><mxPoint x="1520" y="370" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- LED block (combinational) -->
+        <mxCell id="led_block" value="LED outputs&#10;(combinational)&#10;&#10;led_left  = {3{~selected}}&#10;led_right = {3{ selected}}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="1640" y="320" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="led_in" value="selected" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1540" y="380" as="sourcePoint" /><mxPoint x="1640" y="380" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="led_out_L" value="led_left[2:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1;strokeWidth=2" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1880" y="355" as="sourcePoint" /><mxPoint x="2020" y="355" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="led_out_R" value="led_right[2:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1;strokeWidth=2" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1880" y="405" as="sourcePoint" /><mxPoint x="2020" y="405" as="targetPoint" /></mxGeometry></mxCell>
+
+
+        <!-- ================================================================= -->
+        <!-- ROW 3 :  C T L   F S M     +     C O U N T E R                    -->
+        <!-- ================================================================= -->
+
+        <!-- Ctl FSM -->
+        <mxCell id="ctl" value="Ctl (FSM)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="180" y="540" width="260" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="ctl_in_rst" value="reset" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="60" y="585" as="sourcePoint" /><mxPoint x="180" y="585" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="ctl_in_trig" value="trig_ctl" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="60" y="635" as="sourcePoint" /><mxPoint x="180" y="635" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="ctl_in_split" value="split_ctl" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="60" y="685" as="sourcePoint" /><mxPoint x="180" y="685" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="ctl_out_init" value="init_regs" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="440" y="600" as="sourcePoint" /><mxPoint x="560" y="600" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="ctl_out_cen" value="count_enabled" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="440" y="660" as="sourcePoint" /><mxPoint x="580" y="660" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="ctl_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="310" y="770" as="sourcePoint" /><mxPoint x="310" y="720" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- Counter -->
+        <mxCell id="counter" value="Counter&#10;CLK_FREQ = 100 MHz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="800" y="540" width="260" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="cnt_in_init" value="init_regs" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="680" y="600" as="sourcePoint" /><mxPoint x="800" y="600" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="cnt_in_cen" value="count_enabled" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="680" y="660" as="sourcePoint" /><mxPoint x="800" y="660" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="cnt_out_tr" value="time_reading [7:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1060" y="630" as="sourcePoint" /><mxPoint x="1200" y="630" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="cnt_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="930" y="770" as="sourcePoint" /><mxPoint x="930" y="720" as="targetPoint" /></mxGeometry></mxCell>
+
+
+        <!-- ================================================================= -->
+        <!-- ROW 4 :  S N A P S H O T   +   M U X   +   S T A S H              -->
+        <!-- ================================================================= -->
+
+        <!-- Snapshot logic -->
+        <mxCell id="snap" value="Split-snapshot logic&#10;(always-block in Stopwatch.v)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
+          <mxGeometry x="180" y="850" width="280" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="snap_in_tr"   value="time_reading[7:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="40" y="885" as="sourcePoint" /><mxPoint x="180" y="885" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="snap_in_sctl" value="split_ctl" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="40" y="925" as="sourcePoint" /><mxPoint x="180" y="925" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="snap_in_cen"  value="count_enabled" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="40" y="965" as="sourcePoint" /><mxPoint x="180" y="965" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="snap_in_rst"  value="reset" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="40" y="1005" as="sourcePoint" /><mxPoint x="180" y="1005" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="snap_in_init" value="init_regs" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="40" y="1045" as="sourcePoint" /><mxPoint x="180" y="1045" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="snap_out_snap" value="snapshot [7:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="460" y="900" as="sourcePoint" /><mxPoint x="580" y="900" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="snap_out_act"  value="split_active" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="460" y="1010" as="sourcePoint" /><mxPoint x="580" y="1010" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="snap_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="320" y="1140" as="sourcePoint" /><mxPoint x="320" y="1090" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- MUX 2:1 (time_out) -->
+        <mxCell id="mux" value="MUX 2:1&#10;&#10;time_out =&#10;split_active ?&#10;snapshot :&#10;time_reading" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="700" y="870" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="mux_in_d0" value="time_reading[7:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="560" y="920" as="sourcePoint" /><mxPoint x="700" y="920" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="mux_in_d1" value="snapshot[7:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="560" y="980" as="sourcePoint" /><mxPoint x="700" y="980" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="mux_in_sel" value="split_active (sel)" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="560" y="1030" as="sourcePoint" /><mxPoint x="700" y="1030" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="mux_out" value="time_out [7:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="900" y="970" as="sourcePoint" /><mxPoint x="1040" y="970" as="targetPoint" /></mxGeometry></mxCell>
+
+        <!-- Stash FIFO -->
+        <mxCell id="stash" value="Stash  (FIFO)&#10;DEPTH = 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
+          <mxGeometry x="1320" y="850" width="320" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="st_in_tr" value="time_reading[7:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1180" y="900" as="sourcePoint" /><mxPoint x="1320" y="900" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="st_in_smp" value="sample" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1180" y="950" as="sourcePoint" /><mxPoint x="1320" y="950" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="st_in_nxt" value="next_sample" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1180" y="1000" as="sourcePoint" /><mxPoint x="1320" y="1000" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="st_in_rst" value="reset" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1180" y="1050" as="sourcePoint" /><mxPoint x="1320" y="1050" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="st_out" value="stash_out [7:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1640" y="970" as="sourcePoint" /><mxPoint x="1780" y="970" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="st_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1480" y="1140" as="sourcePoint" /><mxPoint x="1480" y="1090" as="targetPoint" /></mxGeometry></mxCell>
+
+
+        <!-- ================================================================= -->
+        <!-- ROW 5 :  S E G _ 7 _ D I S P L A Y                                -->
+        <!-- ================================================================= -->
+
+        <mxCell id="disp" value="Seg_7_Display&#10;&#10;x = { time_out, stash_out }  (16-bit)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10" vertex="1" parent="1">
+          <mxGeometry x="700" y="1200" width="380" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="disp_in_to"  value="time_out[7:0]    -> x[15:8]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="500" y="1245" as="sourcePoint" /><mxPoint x="700" y="1245" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="disp_in_so"  value="stash_out[7:0]  -> x[7:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="500" y="1295" as="sourcePoint" /><mxPoint x="700" y="1295" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="disp_in_clr" value="reset (-> clr)" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="500" y="1355" as="sourcePoint" /><mxPoint x="700" y="1355" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="disp_out_seg" value="seg[6:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1080" y="1245" as="sourcePoint" /><mxPoint x="1240" y="1245" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="disp_out_an"  value="an[3:0]" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1;strokeWidth=2.5" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1080" y="1305" as="sourcePoint" /><mxPoint x="1240" y="1305" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="disp_out_dp"  value="dp" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff;fontStyle=1" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="1080" y="1365" as="sourcePoint" /><mxPoint x="1240" y="1365" as="targetPoint" /></mxGeometry></mxCell>
+        <mxCell id="disp_clk" value="clk" style="endArrow=classic;html=1;fontSize=11;labelBackgroundColor=#ffffff" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="890" y="1470" as="sourcePoint" /><mxPoint x="890" y="1420" as="targetPoint" /></mxGeometry></mxCell>
+
+
+        <!-- ================================================================= -->
+        <!-- LEGEND                                                            -->
+        <!-- ================================================================= -->
+        <mxCell id="leg_box" value="Legend / colour key" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;fontStyle=1;align=left;verticalAlign=top;fontSize=13;spacingTop=8;spacingLeft=10" vertex="1" parent="1">
+          <mxGeometry x="1700" y="1170" width="450" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_mod" value="Instantiated module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11" vertex="1" parent="1"><mxGeometry x="1720" y="1210" width="200" height="30" as="geometry" /></mxCell>
+        <mxCell id="leg_deb" value="Debouncer instance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11" vertex="1" parent="1"><mxGeometry x="1720" y="1250" width="200" height="30" as="geometry" /></mxCell>
+        <mxCell id="leg_reg" value="Register / always-block" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11" vertex="1" parent="1"><mxGeometry x="1720" y="1290" width="200" height="30" as="geometry" /></mxCell>
+        <mxCell id="leg_and" value="" style="shape=mxgraph.electrical.logic_gates.gate_and_2;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10" vertex="1" parent="1"><mxGeometry x="1950" y="1210" width="60" height="30" as="geometry" /></mxCell>
+        <mxCell id="leg_and_t" value="Combinational AND" style="text;html=1;align=left;fontSize=11" vertex="1" parent="1"><mxGeometry x="2020" y="1215" width="130" height="20" as="geometry" /></mxCell>
+        <mxCell id="leg_mux" value="MUX" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10" vertex="1" parent="1"><mxGeometry x="1950" y="1250" width="60" height="30" as="geometry" /></mxCell>
+        <mxCell id="leg_mux_t" value="MUX 2:1" style="text;html=1;align=left;fontSize=11" vertex="1" parent="1"><mxGeometry x="2020" y="1255" width="130" height="20" as="geometry" /></mxCell>
+        <mxCell id="leg_io" value="LED/Output logic" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11" vertex="1" parent="1"><mxGeometry x="1950" y="1290" width="200" height="30" as="geometry" /></mxCell>
+        <mxCell id="leg_line1" value="thin arrow  =  1-bit signal" style="text;html=1;align=left;fontSize=11" vertex="1" parent="1"><mxGeometry x="1720" y="1340" width="430" height="25" as="geometry" /></mxCell>
+        <mxCell id="leg_line2" value="thick arrow  =  multi-bit bus (width in [..])" style="text;html=1;align=left;fontSize=11" vertex="1" parent="1"><mxGeometry x="1720" y="1370" width="430" height="25" as="geometry" /></mxCell>
+        <mxCell id="leg_line3" value="bold pin name  =  module OUTPUT" style="text;html=1;align=left;fontSize=11;fontStyle=1" vertex="1" parent="1"><mxGeometry x="1720" y="1400" width="430" height="25" as="geometry" /></mxCell>
+        <mxCell id="leg_line4" value="plain pin name  =  module INPUT" style="text;html=1;align=left;fontSize=11" vertex="1" parent="1"><mxGeometry x="1720" y="1425" width="430" height="25" as="geometry" /></mxCell>
+        <mxCell id="leg_line5" value="Same signal name on two pins  =  they are wired together." style="text;html=1;align=left;fontSize=11;fontStyle=2" vertex="1" parent="1"><mxGeometry x="1720" y="1455" width="430" height="25" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
